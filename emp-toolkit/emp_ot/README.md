@@ -18,7 +18,7 @@ $ sudo apt-get install libssl-dev
 $ wget https://raw.githubusercontent.com/emp-toolkit/emp-readme/master/scripts/install.py
 $ python install.py --install --tool --ot 
 ```
-After running above commands, you can see the folders `emp-ot` and `emp-tool` inside the folder `/usr/local/include/`, and `emp` library in `/user/local/lib`. Once the `emp-ot` installed, you can use the `emp-ot` in your code.
+After running above commands, you can see the folders `emp-ot` and `emp-tool` inside the folder `/usr/local/include/`, and `libemp-tool.so` library in `/user/local/lib`. Once the `emp-ot` installed, you can use the `emp-ot` in your code.
 
 ## Code
 ### Step 1: Write CMakeLists.txt

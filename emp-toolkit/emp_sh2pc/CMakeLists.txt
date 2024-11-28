@@ -1,13 +1,15 @@
 cmake_minimum_required(VERSION 3.10)
-project(emp_ot_playaround)
+project(garble_circuit)
 
 set(CMAKE_CXX_STANDARD 14)
+
+# Add the required flags for AES-NI support
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -maes -msse4.1")
 
 # Specify the paths to the EMP toolkit headers and libraries
 include_directories(/usr/local/include)  # Adjust if your EMP libraries are elsewhere
 link_directories(/usr/local/lib)          # Adjust if your EMP libraries are elsewhere
 
-# Find OpenSSL
 find_package(OpenSSL REQUIRED)
 if (OpenSSL_FOUND)
     message(STATUS "OpenSSL found at: ${OPENSSL_LIBRARIES}")
@@ -16,10 +18,12 @@ else()
 endif()
 
 # Add the main executable
-add_executable(simple-ot main.cpp)
+# add_executable(simple-gc millionaire.cpp)
+add_executable(simple-gc bit.cpp)
 
 # Link EMP libraries and OpenSSL
-target_link_libraries(simple-ot 
+target_link_libraries(simple-gc
+	/usr/local/lib/libemp-tool.so 
     OpenSSL::SSL 
     OpenSSL::Crypto
 )

@@ -1,3 +1,0 @@
-/home/alan/workspace/Study-Secure-Computation/emp-toolkit/emp_ot_playaround/build/CMakeFiles/simple-ot.dir
-/home/alan/workspace/Study-Secure-Computation/emp-toolkit/emp_ot_playaround/build/CMakeFiles/edit_cache.dir
-/home/alan/workspace/Study-Secure-Computation/emp-toolkit/emp_ot_playaround/build/CMakeFiles/rebuild_cache.dir
