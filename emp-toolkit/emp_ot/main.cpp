@@ -31,7 +31,7 @@ int main(int argc, char** argv) {
         std::cout << "BOB received the messages." << std::endl;
     }else
     {
-        std::cout << "<party> can neither be 1 (for ALICE) or 2 (for BOB)" << std::endl;
+        std::cout << "<party> can either be 1 (for ALICE) or 2 (for BOB)" << std::endl;
     }
 
     return 0;
