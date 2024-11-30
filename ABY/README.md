@@ -12,9 +12,45 @@ $ sudo apt-get update
 $ sudo apt-get install -y libgmp-dev libssl-dev libboost-all-dev
 ```
 
-- [Relic](https://github.com/relic-toolkit/relic)
-- [ENCRYPTO_utils](https://github.com/encryptogroup/ENCRYPTO_utils)
-- [OTExtension](https://github.com/encryptogroup/OTExtension)
+You can stop installing dependencies here and proceed to the next section, which is installing ABY. There’s no need to install `Relic`, `ENCRYPTO_utils`, or `OTExtension` manually. Doing so may result in unexpected errors.
+
+- [Relic](https://github.com/relic-toolkit/relic). RELIC is a modern research-oriented cryptographic meta-toolkit with emphasis on efficiency and flexibility. RELIC can be used to build efficient and usable cryptographic toolkits tailored for specific security levels and algorithmic choices.
+    - Install requirement GMP (as above)
+    - Download the latest version of [Relic](https://github.com/relic-toolkit/relic), then build, and install:
+    ```
+    $ git clone https://github.com/relic-toolkit/relic.git
+    $ cd relic
+    $ mkdir build && cd build
+    $ cmake ..
+    $ make
+    $ sudo make install
+    ```
+
+- [ENCRYPTO_utils](https://github.com/encryptogroup/ENCRYPTO_utils).  ENCRYPTO_utils is a crypto and networking utils used for ABY and OTExtension.
+    - Install requirements [Relic](https://github.com/relic-toolkit/relic) and Boost (as above).
+    - Download [ENCRYPTO_utils](https://github.com/encryptogroup/ENCRYPTO_utils), then build, and install:
+    ```
+    $ git clone --recursive https://github.com/encryptogroup/ENCRYPTO_utils.git
+    $ cd ENCRYPTO_utils
+    $ mkdir build && cd build
+    $ cmake ..
+    $ make
+    $ sudo make install
+    ```
+    *Note 1: in my case, I had to manually add `#include <cstdlib>` in the header file `/src/ENCRYPTO_utils/channel.h`. Otherwise, it raised an error related to `malloc` and `free` functions.
+
+- [OTExtension](https://github.com/encryptogroup/OTExtension). OTExtension is a C++ OT extension implementation.
+    - Install requirements GMP, OpenSSL, and Boost (as above).
+    - Download [OTExtension](https://github.com/encryptogroup/OTExtension), then build, and install:
+    ```
+    $ git clone https://github.com/encryptogroup/OTExtension.git
+    $ cd ENCRYPTO_utils
+    $ mkdir build && cd build
+    $ cmake ..
+    $ make
+    $ sudo make install
+    ```
+    *Note that: according to `WeiViming`'s aswer for [this issue](https://github.com/encryptogroup/OTExtension/issues/32), we should not install `ENCRYPTO_utils` by ourselves before installing `OTExtension`.*
 
 ### Install ABY
 (Move to a partition with sufficient storage space.)
@@ -47,6 +83,8 @@ $ mkdir build && cd build
 $ cmake ..
 $ make
 ```
+
+*In my case, I occur [this issue](https://github.com/encryptogroup/ABY/issues/197). The solution of `Country-If` works for me.*
 
 ### Step 4: Run your code
 Alice (sender):
