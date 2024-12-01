@@ -7,3 +7,7 @@ Survey: https://docs.google.com/spreadsheets/d/1d2tvlHjPaXcnK8h5VqpELuCjcRg0RD-t
 [2] L. K. L. Ng and S. S. M. Chow, "SoK: Cryptographic Neural-Network Computation," 2023 IEEE Symposium on Security and Privacy (SP), San Francisco, CA, USA, 2023, pp. 497-514, doi: 10.1109/SP46215.2023 10179483. [here](https://ieeexplore.ieee.org/document/10179483)
 
 [3] https://www.microsoft.com/en-us/research/project/ezpc-easy-secure-multi-party-computation/?fbclid=IwY2xjawG2PAVleHRuA2FlbQIxMAABHdsDwoqXtvgQJ1W2mX39Lef0yOfRI-dFU8ctx-haL5ANXh1AqJ9qlxUdEQ_aem_JvDc2hUWo978HkTByb0C3Q
+
+[4] https://github.com/primihub/Awesome-Privacy-Computing
+
+[5] https://github.com/Ye-D/PPML-Resource
