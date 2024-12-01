@@ -21,8 +21,6 @@ else()
     message(FATAL_ERROR "ENCRYPTO_utils not found!")
 endif()
 
-find_package(Boost 1.69.0 COMPONENTS system thread filesystem REQUIRED)
-
 # Add the main executable
 add_executable(simple-aby main.cpp)
 
