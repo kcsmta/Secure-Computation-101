@@ -12,18 +12,6 @@ $ sudo apt-get update
 $ sudo apt-get install -y libgmp-dev libssl-dev libboost-all-dev
 ```
 
-- [Relic](https://github.com/relic-toolkit/relic). RELIC is a modern research-oriented cryptographic meta-toolkit with emphasis on efficiency and flexibility. RELIC can be used to build efficient and usable cryptographic toolkits tailored for specific security levels and algorithmic choices.
-    - Install requirement GMP (as above)
-    - Download the latest version of [Relic](https://github.com/relic-toolkit/relic), then build, and install:
-    ```
-    $ git clone https://github.com/relic-toolkit/relic.git
-    $ cd relic
-    $ mkdir build && cd build
-    $ cmake ..
-    $ make
-    $ sudo make install
-    ```
-
 <!-- You can stop installing dependencies here and proceed to the next section, which is installing ABY. There’s no need to install `Relic`, `ENCRYPTO_utils`, or `OTExtension` manually. Doing so may result in unexpected errors.
 
 - [Relic](https://github.com/relic-toolkit/relic). RELIC is a modern research-oriented cryptographic meta-toolkit with emphasis on efficiency and flexibility. RELIC can be used to build efficient and usable cryptographic toolkits tailored for specific security levels and algorithmic choices.
@@ -68,17 +56,15 @@ $ sudo apt-get install -y libgmp-dev libssl-dev libboost-all-dev
 (Move to a partition with sufficient storage space.)
 ```
 $ git clone https://github.com/encryptogroup/ABY.git
-$ mkdir build
 $ cd ABY
+$ mkdir build
 $ cd build
-$ sudo make install
 $ cmake ..
 $ make
+$ sudo make install
 ```
 
-<!-- *Note 1: You may had to manually add `#include <cstdlib>` in the header file `ABY/extern/ENCRYPTO_utils/src/ENCRYPTO_utils/channel.h`. Otherwise, it raised an error related to `malloc` and `free` functions. Should we install `OTExtension` and `ENCRYPTO_utils` libraries before installing `ABY`?* -->
-
-<!-- *Note 3: You may occur [this issue](https://github.com/encryptogroup/ABY/issues/145). One solution is to manually change the line `# INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:Boost::system>;\$<LINK_ONLY:Boost::thread>;GMP::GMP;GMP::GMPXX;OpenSSL::Crypto;RELIC::relic"` to `INTERFACE_LINK_LIBRARIES "/usr/lib/x86_64-linux-gnu/libboost_system.so;/usr/lib/x86_64-linux-gnu/libboost_thread.so;GMP::GMP;GMP::GMPXX;OpenSSL::Crypto;/usr/local/lib/librelic.so"` in the file `/usr/local/lib/cmake/ABY/ABYTargets.cmake`* -->
+*Note 1: in my case, I had to manually add `#include <cstdlib>` in the header file `./ABY/extern/ENCRYPTO_utils/src/ENCRYPTO_utils/channel.h`. Otherwise, it raised an error related to `malloc` and `free` functions.*
 
 After running above commands, you can see the folders `abycore`, `ENCRYPTO_utils`, `ot`, and `relic` inside the folder `/usr/local/include/`, and `libaby.a`, `libencrypto_utils.a`, `libotextention.a`, and `librelic_s.a` library in `/user/local/lib`. Once the `ABY` installed, you can use the `ABY` in your code.
 
@@ -96,11 +82,24 @@ $ cmake ..
 $ make
 ```
 
-*Note 1: I occured [this issue](https://github.com/encryptogroup/ABY/issues/151). The solution is to manually comment (or remove) the line `find_dependency(MIRACL)` in the file `/usr/local/lib/cmake/ABY/ABYConfig.cmake`. According to [the issue](https://github.com/encryptogroup/ABY/issues/151), ABY replaced MIRACL as dependency with the RELIC library**
+*Note 1: I occured [this issue](https://github.com/encryptogroup/ABY/issues/151). The solution is to manually comment (or remove) the line `find_dependency(MIRACL)` in the file `/usr/local/lib/cmake/ABY/ABYConfig.cmake`. According to [the issue](https://github.com/encryptogroup/ABY/issues/151), ABY replaced MIRACL as dependency with the RELIC library*
 
-*Note 2: I occured [this issue](https://github.com/encryptogroup/ABY/pull/135) and [this issue](https://github.com/encryptogroup/ABY/issues/145). The solution is to manually change the line `# INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:Boost::system>;\$<LINK_ONLY:Boost::thread>;GMP::GMP;GMP::GMPXX;OpenSSL::Crypto;RELIC::relic"` to `INTERFACE_LINK_LIBRARIES "/usr/lib/x86_64-linux-gnu/libboost_system.so;/usr/lib/x86_64-linux-gnu/libboost_thread.so;GMP::GMP;GMP::GMPXX;OpenSSL::Crypto;/usr/local/lib/librelic.so"` in the file `/usr/local/lib/cmake/ENCRYPTO_utils/ENCRYPTO_utilsTargets.cmake`*
+*Note 2: I occured [this issue](https://github.com/encryptogroup/ABY/pull/135) and [this issue](https://github.com/encryptogroup/ABY/issues/145). The solution is: in the file `/usr/local/lib/cmake/ENCRYPTO_utils/ENCRYPTO_utilsTargets.cmake`, manually change the line `INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:Boost::system>;\$<LINK_ONLY:Boost::thread>;GMP::GMP;GMP::GMPXX;OpenSSL::Crypto;RELIC::relic"` → `INTERFACE_LINK_LIBRARIES "/usr/lib/x86_64-linux-gnu/libboost_system.so;/usr/lib/x86_64-linux-gnu/libboost_thread.so;GMP::GMP;GMP::GMPXX;OpenSSL::Crypto;/usr/local/lib/librelic.so"`*
 
 *Note 3: I occured [this issue](https://github.com/encryptogroup/ABY/issues/197). The solution of `Country-If` works for me.*
+
+*Note 4: You may need to build Relic (to create `librelic.so` file; `ABY` only automatically create `librelic_s.a`). Run steps below:*
+- [Relic](https://github.com/relic-toolkit/relic). RELIC is a modern research-oriented cryptographic meta-toolkit with emphasis on efficiency and flexibility. RELIC can be used to build efficient and usable cryptographic toolkits tailored for specific security levels and algorithmic choices.
+    - Install requirement GMP (as above)
+    - Download the latest version of [Relic](https://github.com/relic-toolkit/relic), then build, and install:
+    ```
+    $ git clone https://github.com/relic-toolkit/relic.git
+    $ cd relic
+    $ mkdir build && cd build
+    $ cmake ..
+    $ make
+    $ sudo make install
+    ```
 
 ### Step 4: Run your code
 Alice (sender):
