@@ -1,10 +1,14 @@
-# Study-Secure-Computation Resources
+# Secure Computation 101
 
 ## Introduction and outline
 This is a beginner-friendly resource which includes various secure computation libraries. This repo aims to help you understand and implement secure computation techniques such as homomorphic encryption (HE), oblivious trasfer (OT), garble circuit (GC), arithmetic secret sharing (e.g., Beaver), boolean secret sharing (e.g.,GMW), function secret sharing (FSS), zero-knowledge proof (ZKP). Each library included in this repository can be studied independently, allowing you to learn at your own pace and focus on the techniques that interest you most. Jump into any topic, anytime!
 
 A. Homomorphic encryption
-1. [OpenFHE](https://github.com/openfheorg/openfhe-development) *comming soon!*
+1. [OpenFHE](https://github.com/openfheorg/openfhe-development) *In progress!*
+    1. CKKS
+    2. BFV/BGV
+    3. TFHE
+    4. MKHE
 2. [SEAL](https://github.com/microsoft/SEAL) *comming soon!*
 3. [HElib](https://github.com/homenc/HElib) *comming soon!*
 4. [HEaaN](https://github.com/snucrypto/HEAAN) *comming soon!*
