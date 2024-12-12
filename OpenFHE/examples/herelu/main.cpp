@@ -20,23 +20,16 @@ int main() {
     cc->Enable(ADVANCEDSHE);
     std::cout << "CKKS scheme is using ring dimension " << cc->GetRingDimension() << std::endl << std::endl;
 
-    // A 1024x4096 matrix
-    size_t rows = 1024;
-    size_t cols = 4096;
-
     // Step 2: Key generation
     auto keys = cc->KeyGen();
     cc->EvalMultKeyGen(keys.secretKey);
     cc->EvalSumKeyGen(keys.secretKey);
 
-    // Generate all required rotation keys for combining results
-    std::vector<int> rotationIndices;
-    for (size_t i = 1; i < rows; ++i) { // Indices required for all row rotations
-        rotationIndices.push_back(static_cast<int>(i));
-    }
-    cc->EvalAtIndexKeyGen(keys.secretKey, rotationIndices);
-
     // Step 3: Plain matrix initialization
+    // A 1024x4096 matrix
+    size_t rows = 1024;
+    size_t cols = 4096;
+
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_real_distribution<> dis(0.0, 10.0); // Random values between 0 and 10
@@ -72,16 +65,6 @@ int main() {
 
         // Sum up the results (dot product)
         resultCiphertexts[i] = cc->EvalSum(tempCiphertext, cols);
-    }
-
-    // Combine all row results into a single ciphertext
-    auto combinedCiphertext = resultCiphertexts[0]; // Initialize with the first row result
-    for (size_t i = 1; i < rows; ++i) {
-        // Rotate the result to its correct position
-        auto rotatedCiphertext = cc->EvalAtIndex(resultCiphertexts[i], i);
-
-        // Add the rotated result to the combined ciphertext
-        combinedCiphertext = cc->EvalAdd(combinedCiphertext, rotatedCiphertext);
     }
 
     auto end = std::chrono::high_resolution_clock::now(); // End timing

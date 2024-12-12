@@ -58,7 +58,4 @@ endif()
 ### EXAMPLE:
 ### add_executable( test demo-simple-example.cpp )
 
-add_executable(naive naive.cpp)
-# add_executable(test_naive naive_test.cpp)
-# add_executable(hs halevi_soup.cpp)
-# add_executable(test_hs halevi_soup_test.cpp)
+# add_executable(herelu main.cpp)
