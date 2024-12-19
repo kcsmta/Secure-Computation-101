@@ -22,11 +22,15 @@ else()
 endif()
 
 # Add the main executable
-# add_executable(main main.cpp)
-add_executable(main_large main_large.cpp)
-
-# Link ABY library
-target_link_libraries(main_large
+add_executable(main main_large.cpp)
+target_link_libraries(main
     ABY::aby
     ENCRYPTO_utils::encrypto_utils
 )
+
+# add_executable(main_large main_large.cpp)
+# Link ABY library
+# target_link_libraries(main_large
+#     ABY::aby
+#     ENCRYPTO_utils::encrypto_utils
+# )

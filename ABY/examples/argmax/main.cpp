@@ -45,8 +45,8 @@ int main(int argc, char** argv) {
     const uint32_t port = 8888;
     const string address = "127.0.0.1";
 
-    vector<double> u = {1.5, 2.5, 0.5}; // Client's vector
-    vector<double> v = {9.5, 1.5, 2.5}; // Server's vector
+    vector<double> u = {1.5, 7.5, 100.5}; // Client's vector
+    vector<double> v = {0.5, 1.5, 2.5}; // Server's vector
     size_t n = u.size();
 
     vector<uint64_t> u_scaled(n), v_scaled(n);

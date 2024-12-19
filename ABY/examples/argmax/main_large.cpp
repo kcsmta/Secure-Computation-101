@@ -7,8 +7,10 @@
 #include <cstdlib>
 #include <cmath>
 #include <cassert>
+#include <chrono> // For measuring time
 
 using namespace std;
+using namespace std::chrono;
 
 const int SCALE = 1000; // Fixed-point scaling factor
 
@@ -61,7 +63,7 @@ int main(int argc, char** argv) {
     const uint32_t port = 8888;
     const string address = "127.0.0.1";
 
-    size_t n = 1000; // Example: Large vector size
+    size_t n = 10; // Example: Large vector size
     vector<double> u(n), v(n);
 
     // Random initialization for vectors
@@ -79,6 +81,9 @@ int main(int argc, char** argv) {
     if (role == 1) { // Only one party prints the ground truth
         cout << "Groundtruth Argmax Index: " << groundtruth_argmax << endl;
     }
+
+    // Start timing
+    auto start_time = high_resolution_clock::now();
 
     ABYParty* party = new ABYParty((e_role)role, address, port, LT, 32, 1);
     vector<Sharing*>& sharings = party->GetSharings();
@@ -105,6 +110,8 @@ int main(int argc, char** argv) {
 
     party->ExecCircuit();
 
+    auto end_time = high_resolution_clock::now(); // End timing
+
     if (role == 1) {
         uint32_t* output = (uint32_t*)argmax_result->get_clear_value_ptr();
         cout << "Secure Computation Argmax Index: " << *output << endl;
@@ -115,6 +122,10 @@ int main(int argc, char** argv) {
         } else {
             cout << "Secure computation result does NOT match the ground truth!" << endl;
         }
+
+        // Display elapsed time
+        auto duration = duration_cast<milliseconds>(end_time - start_time);
+        cout << "Protocol Running Time: " << duration.count() << " ms" << endl;
     }
 
     delete party;
